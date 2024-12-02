@@ -1,8 +1,9 @@
-pws_full = 8
+
 
 local function calculate_einherjar(self, card, context)
     if not context.blueprint then
         if G.GAME.blind.boss and context.individual and context.cardarea == G.play and context.other_card:is_suit(card.ability.suit) then
+            local pws_full = Valkyrie.pws_full_charge
             if (not card.ability.pws or true) and (card.ability.charge or 0) < pws_full then
                 card.ability.charge = card.ability.charge + 1
                 if (card.ability.charge == pws_full) then
@@ -81,20 +82,14 @@ local function loc_vars_einherjar(self,info_queue,center)
             center.ability.current_bonus, 
             center.ability.added_bonus,
             center.ability.charge or 0,
-            pws_full,
+            Valkyrie.pws_full_charge,
             center.ability.suit,
             G.P_CENTERS[center.ability.reward].name
         }
     }
 end
 
-local function calculate_earnings(center)
-    if G.GAME.blind and G.GAME.blind.boss then
-        return center.ability.current_bonus * 2
-    else
-        return center.ability.current_bonus
-    end
-end
+
 
 Valkyrie.einherjars = {
     {
@@ -150,7 +145,7 @@ Valkyrie.einherjars = {
         pos = {x = 3,y = 0},
         soul_pos = {x = 7, y = 0},
         calc_dollar_bonus = function(self,card)
-            return calculate_earnings(card)
+            return Valkyrie.calculate_earnings(card)
         end
     }
 }

@@ -98,6 +98,7 @@ return {
             k_valkyrie_finishing_strike = "Finishing Strike!",
             k_valkyrie_great_magic = "Great Magic!",
             k_valkyrie_charge = "Charge",
+            k_valkyrie_joker_def_pws = "PWS: "
         },
     },
 }
